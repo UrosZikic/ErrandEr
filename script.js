@@ -35,9 +35,40 @@ function add_task() {
 
 // display_task function collected data translates into a list
 function display_tasks(task_parameter) {
+  const task_holder = document.createElement("div");
+  const task_delete_button = document.createElement("button");
   const task_item = document.createElement("li");
+
   task_item.textContent = String(task_parameter);
-  task_display.appendChild(task_item);
+
+  task_delete_button.classList.add("delete_task");
+  task_delete_button.textContent = "x";
+
+  task_holder.appendChild(task_item);
+  task_holder.appendChild(task_delete_button);
+  task_display.appendChild(task_holder);
+
+  // retrive DOM element index number
+  const task_holder_index = Array.from(task_display.children).indexOf(
+    task_holder
+  );
+
+  // delete tasks
+  task_delete_button.onclick = () => {
+    while (task_display.firstChild) {
+      task_display.removeChild(task_display.firstChild);
+    }
+    task_collection = task_collection.filter(
+      (task, index) => index !== task_holder_index
+    );
+
+    localStorage.setItem("global_tasks", task_collection);
+
+    // display tasks
+    task_collection.forEach((task) => {
+      display_tasks(task);
+    });
+  };
 }
 
 // addTask() call
