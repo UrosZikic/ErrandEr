@@ -2,13 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="description" content="ErrandEr is an interactive to-do app" />
+    <meta
+      name="keywords"
+      content="list, tasks, to-do, website, responsive, interactive, app"
+    />
+    <meta name="author" content="Uros Zikic" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Errander - home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&family=Roboto:wght@300;400;700&family=Rubik:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
   </head>
   <body>
-    <input type="text" id="task" />
-    <button id="submit-task">submit</button>
-    <ul id="tasks"></ul>
-    <script src="script.js"></script>
+    <header id="header"></header>
+    <main>
+      <div id="form-container">
+        <label for="task">Insert a new task</label>
+        <br />
+        <input type="text" id="task" />
+        <button id="submit-task" name="add-item-button">Add</button>
+        <button id="edit-task" name="edit-item-button" class="invisible">
+          Edit
+        </button>
+      </div>
+      <div>
+        <h2>Errand List</h2>
+        <ul id="tasks"></ul>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="assets/scripts/script.js "></script>
   </body>
 </html>

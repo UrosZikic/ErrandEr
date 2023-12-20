@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+h2 {
+  font-size: 3.2rem;
+  font-weight: 400;
+  font-family: roboto, sans-serif;
+}
+.invisible {
+  display: none;
+}
+
+#header {
+  position: fixed;
+  width: 100%;
+  background-color: transparent;
+  z-index: 999;
+}
+#header img {
+  width: 100%;
+  max-width: 14rem;
+  height: 100%;
+  max-height: 14rem;
+  margin: 1rem 50%;
+  transform: translateX(-50%);
+}
+.site_theme_toggle {
+  font-size: 5rem;
+  border: none;
+  position: fixed;
+  top: 4rem;
+  right: 4rem;
+  background-color: transparent;
+}
+
+main {
+  /* align with fixed header */
+
+  width: 100%;
+  max-width: 110rem;
+  margin: 0 auto;
+  padding: 20rem 5px 0rem 5px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+main label {
+  font-size: 2rem;
+  padding-left: 0.5rem;
+  font-family: roboto, sans-serif;
+}
+
+main input {
+  font-size: 1.6rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #000;
+  vertical-align: middle;
+  font-family: roboto, sans-serif;
+}
+main button {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #000;
+  background-color: #fff;
+  vertical-align: middle;
+  font-family: roboto, sans-serif;
+}
+#form-container {
+  padding-top: 0.5rem;
+}
+#tasks li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+
+  border: 1px solid black;
+  padding: 1rem;
+
+  list-style: none;
+  font-size: 2rem;
+  font-family: roboto, sans-serif;
+}
+
+.delete_task,
+.edit-task {
+  color: black;
+  font-size: 3rem;
+  border: none;
+}
