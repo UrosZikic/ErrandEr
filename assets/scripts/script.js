@@ -1,13 +1,13 @@
 "use strict";
 // connect DOM
 const task_input = document.getElementById("task");
-const submit_task_button = document.getElementById("submit-task");
-const edit_task_button = document.getElementById("edit-task");
+const submit_task_button = document.getElementById("submit_task");
+const edit_task_button = document.getElementById("edit_task");
 const task_display = document.getElementById("tasks");
 let task_collection = [];
 
 // On page load - collect tasks
-(function loadTasks() {
+(function load_tasks() {
   const load_tasks_from_storage = localStorage.getItem("global_tasks");
   if (!load_tasks_from_storage) {
     task_collection = [];
@@ -62,6 +62,7 @@ function edit_task(target_task, target_index) {
       // return to default
       edit_task_button.classList.add("invisible");
       submit_task_button.classList.remove("invisible");
+      task_input.value = "";
     };
   }
 }
@@ -79,7 +80,7 @@ function display_tasks(task_parameter) {
   task_delete_button.ariaLabel = "delete button";
   task_delete_button.innerHTML = `<i class="fas fa-trash"></i>`;
 
-  task_edit_button.classList.add("edit-task");
+  task_edit_button.classList.add("edit_task");
   task_edit_button.ariaLabel = "edit button";
   task_edit_button.innerHTML = '<i class="fas fa-pen"></i>';
 
@@ -119,7 +120,7 @@ function display_tasks(task_parameter) {
   };
 }
 
-// addTask() call
+// add_task() call
 submit_task_button.addEventListener("click", () => add_task());
 document.addEventListener("keyup", (e) => {
   e.preventDefault();
@@ -128,7 +129,11 @@ document.addEventListener("keyup", (e) => {
     if (document.activeElement !== task_input) {
       task_input.focus();
     } else {
-      add_task();
+      if (!submit_task_button.classList.contains("invisible")) {
+        add_task();
+      } else {
+        edit_task_button.click();
+      }
     }
   }
 });
@@ -152,23 +157,23 @@ const options = {
 
 function add_dark_mode_widget() {
   new Darkmode(options).showWidget();
-  page_load();
-
+  page_load_theme_color();
+  // kebab case is necessary because darkmode-toggle is a library class
   const dark_mode_toggle_btn = document.querySelector(".darkmode-toggle");
   dark_mode_toggle_btn.addEventListener("click", () => {
-    page_load();
+    page_load_theme_color();
   });
 }
 // load logo
 const site_header = document.querySelector("#header");
 const site_header_logo = document.createElement("img");
 
-function page_load() {
+function page_load_theme_color() {
   const html_body = document.querySelector("body");
-
+  // kebab case is necessary because darkmode--activated is a library class
   site_header_logo.src = html_body.classList.contains("darkmode--activated")
-    ? "assets/images/logo-dark.png"
-    : "assets/images/logo-light.png";
+    ? "assets/images/logo_dark.png"
+    : "assets/images/logo_light.png";
 
   site_header_logo.alt = "website brand logo";
   site_header.appendChild(site_header_logo);

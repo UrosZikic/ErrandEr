@@ -75,7 +75,7 @@ main button {
   vertical-align: middle;
   font-family: roboto, sans-serif;
 }
-#form-container {
+#form_container {
   padding-top: 0.5rem;
 }
 #tasks li {
@@ -93,8 +93,14 @@ main button {
 }
 
 .delete_task,
-.edit-task {
+.edit_task {
   color: black;
   font-size: 3rem;
   border: none;
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    grid-template-columns: 1fr;
+  }
 }
