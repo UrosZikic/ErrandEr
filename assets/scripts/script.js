@@ -38,6 +38,7 @@ function add_task() {
 function edit_task(target_task, target_index) {
   task_input.value = target_task;
   if (target_task) {
+    task_input.focus();
     edit_task_button.classList.remove("invisible");
     submit_task_button.classList.add("invisible");
     edit_task_button.onclick = () => {
@@ -75,6 +76,7 @@ function display_tasks(task_parameter) {
   const task_item = document.createElement("li");
 
   task_item.textContent = String(task_parameter);
+  task_item.classList.add("task_item_el");
 
   task_delete_button.classList.add("delete_task");
   task_delete_button.ariaLabel = "delete button";
@@ -96,19 +98,33 @@ function display_tasks(task_parameter) {
 
   // delete tasks
   task_delete_button.onclick = () => {
-    while (task_display.firstChild) {
-      task_display.removeChild(task_display.firstChild);
-    }
-    task_collection = task_collection.filter(
-      (task, index) => index !== task_holder_index
-    );
-
-    localStorage.setItem("global_tasks", task_collection);
-
-    // display tasks
-    task_collection.forEach((task) => {
-      display_tasks(task);
+    let task_item_el = document.querySelectorAll(".task_item_el");
+    task_item_el.forEach((task_value, task_index) => {
+      if (
+        task_value.textContent === task_collection[task_holder_index] &&
+        task_index === task_holder_index
+      ) {
+        task_item.classList.add("remove_from_view");
+      }
     });
+
+    setTimeout(() => {
+      while (task_display.firstChild) {
+        task_display.removeChild(task_display.firstChild);
+      }
+
+      task_collection = task_collection.filter(
+        (task, index) => index !== task_holder_index
+      );
+
+      localStorage.setItem("global_tasks", task_collection);
+
+      // display tasks
+      task_collection.forEach((task) => {
+        display_tasks(task);
+      });
+    }, 350);
+    task_input.value = "";
   };
 
   //edit tasks
