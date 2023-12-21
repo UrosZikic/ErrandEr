@@ -9,13 +9,17 @@ html {
   overflow-x: hidden;
 }
 
+.fas {
+  font-size: 3rem;
+}
+
 h2 {
   font-size: 3.2rem;
   font-weight: 400;
   font-family: roboto, sans-serif;
 }
 .invisible {
-  display: none;
+  display: none !important;
 }
 .remove_from_view {
   transform: translateX(2000px);
@@ -84,8 +88,8 @@ main button {
   padding-top: 0.5rem;
 }
 #tasks li {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 30px 1fr;
   align-items: center;
   margin: 0.5rem 0;
 
@@ -97,7 +101,18 @@ main button {
 
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
-
+.inner-list {
+  display: flex !important;
+  justify-content: space-between;
+}
+.task_item_el {
+  width: 100%;
+  box-shadow: none !important ;
+}
+input[type="checkbox"] {
+  width: 3rem;
+  height: 3rem;
+}
 .delete_task,
 .edit_task {
   color: black;
@@ -109,4 +124,20 @@ main button {
   main {
     grid-template-columns: 1fr;
   }
+}
+
+.task_list_top_part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task_list_top_part input {
+  width: 3rem;
+  height: 3rem;
+}
+
+.single_task_container {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 1rem;
 }

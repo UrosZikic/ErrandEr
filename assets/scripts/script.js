@@ -4,7 +4,10 @@ const task_input = document.getElementById("task");
 const submit_task_button = document.getElementById("submit_task");
 const edit_task_button = document.getElementById("edit_task");
 const task_display = document.getElementById("tasks");
+const task_multi_selector = document.getElementById("task_multi_selector");
 let task_collection = [];
+let items_to_delete_container = [];
+let id = 0;
 
 // On page load - collect tasks
 (function load_tasks() {
@@ -70,13 +73,27 @@ function edit_task(target_task, target_index) {
 
 // display_task function collected data translates into a list
 function display_tasks(task_parameter) {
-  const task_holder = document.createElement("div");
+  id += 1;
+  const task_holder = document.createElement("li");
+  const task_actions = document.createElement("div");
   const task_delete_button = document.createElement("button");
   const task_edit_button = document.createElement("button");
   const task_item = document.createElement("li");
+  const task_selector_label = document.createElement("label");
+  const task_single_selector = document.createElement("input");
+  const task_item_unordered_list = document.createElement("ul");
+
+  task_holder.classList.add("single_task_container");
+
+  task_single_selector.type = "checkbox";
+  task_single_selector.classList.add("single_checkbox_item");
+  task_single_selector.id = `check_box${id}`;
+  task_selector_label.htmlFor = `check_box${id}`;
+  task_selector_label.classList.add("invisible");
 
   task_item.textContent = String(task_parameter);
   task_item.classList.add("task_item_el");
+  task_item.classList.add("inner-list");
 
   task_delete_button.classList.add("delete_task");
   task_delete_button.ariaLabel = "delete button";
@@ -86,14 +103,18 @@ function display_tasks(task_parameter) {
   task_edit_button.ariaLabel = "edit button";
   task_edit_button.innerHTML = '<i class="fas fa-pen"></i>';
 
-  task_holder.appendChild(task_delete_button);
-  task_holder.appendChild(task_edit_button);
-  task_item.appendChild(task_holder);
-  task_display.appendChild(task_item);
+  task_actions.appendChild(task_delete_button);
+  task_actions.appendChild(task_edit_button);
+  task_item.appendChild(task_actions);
+  task_holder.appendChild(task_selector_label);
+  task_holder.appendChild(task_single_selector);
+  task_item_unordered_list.appendChild(task_item);
+  task_holder.appendChild(task_item_unordered_list);
+  task_display.appendChild(task_holder);
 
   // retrive DOM element index number
   const task_holder_index = Array.from(task_display.children).indexOf(
-    task_item
+    task_holder
   );
 
   // delete tasks
@@ -104,7 +125,7 @@ function display_tasks(task_parameter) {
         task_value.textContent === task_collection[task_holder_index] &&
         task_index === task_holder_index
       ) {
-        task_item.classList.add("remove_from_view");
+        task_holder.classList.add("remove_from_view");
       }
     });
 
@@ -127,14 +148,85 @@ function display_tasks(task_parameter) {
     task_input.value = "";
   };
 
+  const single_checkbox_item = document.querySelectorAll(
+    ".single_checkbox_item"
+  );
+  const task_multi_selector = document.getElementById("task_multi_selector"); // Assuming you have an element with this ID
+
+  single_checkbox_item.forEach((checkbox_item) => {
+    checkbox_item.onchange = () => {
+      let any_box_checked = false; // Initialize to false for each checkbox change
+
+      single_checkbox_item.forEach((checkbox) => {
+        if (checkbox.checked) {
+          any_box_checked = true;
+        }
+      });
+
+      if (any_box_checked) {
+        task_multi_selector.classList.remove("invisible");
+      } else {
+        task_multi_selector.classList.add("invisible");
+      }
+
+      items_to_delete_container.length = 0;
+      single_checkbox_item.forEach((checkbox, checkbox_index) => {
+        if (checkbox.checked) {
+          items_to_delete_container.push(checkbox_index);
+        }
+      });
+      console.log(items_to_delete_container);
+    };
+  });
+
   //edit tasks
   task_edit_button.onclick = () => {
     const target_item = task_collection.filter(
-      (task, index) => index === task_holder_index
+      (task, index) => index === task_holder_index - 1
     );
-    edit_task(...target_item, task_holder_index);
+    edit_task(...target_item, task_holder_index - 1);
   };
 }
+// multi delete function
+
+function delete_many_tasks(selected_items) {
+  let delete_these_tasks = [];
+
+  for (let i = 0; i < task_collection.length; i++) {
+    const selectedIndex = selected_items[i];
+    let value_set = [];
+    value_set.push(task_collection[selectedIndex]);
+    value_set.push(selectedIndex);
+    delete_these_tasks.push(value_set);
+  }
+  let temporary_task_collection = [];
+  // Loops through task_collection array and pushes only those tasks not targeted for deletion!
+  for (let i = 0; i < task_collection.length; i++) {
+    const deleteIndex = delete_these_tasks.findIndex((item) => item[1] === i);
+
+    if (deleteIndex === -1) {
+      temporary_task_collection.push(task_collection[i]);
+    }
+  }
+  task_collection = temporary_task_collection;
+  // test
+  while (task_display.firstChild) {
+    task_display.removeChild(task_display.firstChild);
+  }
+
+  localStorage.setItem("global_tasks", task_collection);
+
+  // display tasks
+  task_collection.forEach((task) => {
+    display_tasks(task);
+  });
+
+  task_input.value = "";
+}
+
+task_multi_selector.addEventListener("click", () =>
+  delete_many_tasks(items_to_delete_container)
+);
 
 // add_task() call
 submit_task_button.addEventListener("click", () => add_task());
