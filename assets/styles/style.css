@@ -63,6 +63,10 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+main div:nth-child(2) {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+}
 
 main label {
   font-size: 2rem;

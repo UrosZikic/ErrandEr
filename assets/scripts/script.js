@@ -27,21 +27,28 @@ let id = 0;
 
   // delete all tasks
   function delete_all_tasks() {
-    if (task_display.firstChild) {
-      while (task_display.firstChild) {
-        task_display.removeChild(task_display.firstChild);
+    let task_item_el = document.querySelectorAll(".single_task_container");
+    task_item_el.forEach((task) => {
+      task.classList.add("remove_from_view");
+    });
+
+    setTimeout(() => {
+      if (task_display.firstChild) {
+        while (task_display.firstChild) {
+          task_display.removeChild(task_display.firstChild);
+        }
+
+        task_collection = [];
+        localStorage.setItem("global_tasks", task_collection);
+
+        // display tasks
+        task_collection.forEach((task) => {
+          display_tasks(task);
+        });
+      } else {
+        return null;
       }
-
-      task_collection = [];
-      localStorage.setItem("global_tasks", task_collection);
-
-      // display tasks
-      task_collection.forEach((task) => {
-        display_tasks(task);
-      });
-    } else {
-      return null;
-    }
+    }, 350);
   }
   delete_all_tasks_btn.onclick = () => {
     delete_all_tasks();
