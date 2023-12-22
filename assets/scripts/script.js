@@ -5,6 +5,7 @@ const submit_task_button = document.getElementById("submit_task");
 const edit_task_button = document.getElementById("edit_task");
 const task_display = document.getElementById("tasks");
 const task_multi_selector = document.getElementById("task_multi_selector");
+const delete_all_tasks_btn = document.querySelector("#delete_all_tasks");
 let task_collection = [];
 let items_to_delete_container = [];
 let id = 0;
@@ -23,6 +24,28 @@ let id = 0;
   task_collection.forEach((task) => {
     display_tasks(task);
   });
+
+  // delete all tasks
+  function delete_all_tasks() {
+    if (task_display.firstChild) {
+      while (task_display.firstChild) {
+        task_display.removeChild(task_display.firstChild);
+      }
+
+      task_collection = [];
+      localStorage.setItem("global_tasks", task_collection);
+
+      // display tasks
+      task_collection.forEach((task) => {
+        display_tasks(task);
+      });
+    } else {
+      return null;
+    }
+  }
+  delete_all_tasks_btn.onclick = () => {
+    delete_all_tasks();
+  };
 })();
 
 // add a new task
@@ -165,8 +188,10 @@ function display_tasks(task_parameter) {
 
       if (any_box_checked) {
         task_multi_selector.classList.remove("invisible");
+        delete_all_tasks_btn.classList.add("invisible");
       } else {
         task_multi_selector.classList.add("invisible");
+        delete_all_tasks_btn.classList.remove("invisible");
       }
 
       items_to_delete_container.length = 0;
@@ -221,6 +246,8 @@ function delete_many_tasks(selected_items) {
     display_tasks(task);
   });
 
+  document.querySelector("#task_multi_selector").classList.add("invisible");
+  delete_all_tasks_btn.classList.remove("invisible");
   task_input.value = "";
 }
 

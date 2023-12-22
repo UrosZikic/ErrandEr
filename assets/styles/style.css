@@ -25,6 +25,9 @@ h2 {
   transform: translateX(2000px);
   transition: all 1s;
 }
+.red-bucket {
+  color: red;
+}
 
 #header {
   position: fixed;
@@ -120,7 +123,7 @@ input[type="checkbox"] {
   border: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1100px) {
   main {
     grid-template-columns: 1fr;
   }
@@ -140,4 +143,5 @@ input[type="checkbox"] {
   display: grid;
   grid-template-columns: 30px 1fr;
   gap: 1rem;
+  cursor: grab;
 }
