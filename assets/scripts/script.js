@@ -71,6 +71,7 @@ function edit_task(target_task, target_index) {
       // console.log("success");
       task_collection.filter((task, index) => {
         if (index === target_index) {
+          console.log(index, target_index);
           // takes the edit input text
           const new_input_value = task_input.value;
           //substitutes the target task's previous value with a new value
@@ -207,9 +208,9 @@ function display_tasks(task_parameter) {
   //edit tasks
   task_edit_button.onclick = () => {
     const target_item = task_collection.filter(
-      (task, index) => index === task_holder_index - 1
+      (task, index) => index === task_holder_index
     );
-    edit_task(...target_item, task_holder_index - 1);
+    edit_task(...target_item, task_holder_index);
   };
 }
 // multi delete function
