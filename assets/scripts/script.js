@@ -113,8 +113,11 @@ function display_tasks(task_parameter) {
   const task_selector_label = document.createElement("label");
   const task_single_selector = document.createElement("input");
   const task_item_unordered_list = document.createElement("ul");
+  const task_text = document.createElement("textarea");
 
   task_holder.classList.add("single_task_container");
+
+  task_actions.className = "task_actions";
 
   task_single_selector.type = "checkbox";
   task_single_selector.classList.add("single_checkbox_item");
@@ -122,7 +125,14 @@ function display_tasks(task_parameter) {
   task_selector_label.htmlFor = `check_box${id}`;
   task_selector_label.classList.add("invisible");
 
-  task_item.textContent = String(task_parameter);
+  task_text.className = "task_text";
+  task_text.readOnly = true;
+  task_text.textContent = String(task_parameter);
+  task_text.style.height =
+    task_text.textContent.length <= 32
+      ? `25px`
+      : `${(task_text.textContent.length / 32) * 30}px`;
+
   task_item.classList.add("task_item_el");
   task_item.classList.add("inner-list");
 
@@ -136,6 +146,7 @@ function display_tasks(task_parameter) {
 
   task_actions.appendChild(task_delete_button);
   task_actions.appendChild(task_edit_button);
+  task_item.appendChild(task_text);
   task_item.appendChild(task_actions);
   task_holder.appendChild(task_selector_label);
   task_holder.appendChild(task_single_selector);

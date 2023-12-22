@@ -149,3 +149,15 @@ input[type="checkbox"] {
   gap: 1rem;
   cursor: grab;
 }
+
+.task_actions {
+  box-shadow: none !important;
+}
+.task_text {
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 1.8rem;
+  height: 100px;
+  overflow-y: hidden;
+}
