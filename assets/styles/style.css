@@ -73,6 +73,64 @@ main label {
   padding-left: 0.5rem;
   font-family: roboto, sans-serif;
 }
+.prio_container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0rem;
+}
+.prio_container label {
+  font-size: 1.7rem;
+}
+.prio_icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+.prio_task_container {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+input[type="radio"]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+input[type="radio"]:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+.low_prio:checked:after {
+  background-color: green;
+}
+.mid_prio:checked:after {
+  background-color: #ffa500;
+}
+.high_prio:checked:after {
+  background-color: red;
+}
 
 main input {
   font-size: 1.6rem;
@@ -82,6 +140,7 @@ main input {
   vertical-align: middle;
   font-family: roboto, sans-serif;
 }
+
 main button {
   padding: 1rem 2rem;
   font-size: 1.6rem;
@@ -94,6 +153,13 @@ main button {
 #form_container {
   padding-top: 0.5rem;
 }
+#form_container p {
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  font-family: roboto, sans-serif;
+  color: red;
+}
+
 #tasks li {
   display: grid;
   grid-template-columns: 30px 1fr;
@@ -144,6 +210,7 @@ input[type="checkbox"] {
 }
 
 .single_task_container {
+  position: relative;
   display: grid;
   grid-template-columns: 30px 1fr;
   gap: 1rem;
@@ -154,10 +221,17 @@ input[type="checkbox"] {
   box-shadow: none !important;
 }
 .task_text {
+  font-family: roboto, sans-serif;
   border: none;
   outline: none;
   resize: none;
   font-size: 1.8rem;
-  height: 100px;
+  /* height: 100px */
+  width: 100%;
   overflow-y: hidden;
+}
+
+.dark_theme {
+  background-color: black;
+  color: white;
 }

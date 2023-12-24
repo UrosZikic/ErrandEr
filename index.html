@@ -23,16 +23,40 @@
     />
   </head>
   <body>
-    <header id="header"></header>
+    <header id="header">
+      <img src="assets/images/logo_light.png" alt="website logo" />
+    </header>
     <main>
       <div id="form_container">
         <label for="task">Insert a new task</label>
         <br />
+        <div class="prio_container">
+          <label for="priority">priority</label>
+          <input
+            type="radio"
+            value="low"
+            name="priority"
+            class="low_prio prio"
+          />
+          <input
+            type="radio"
+            value="mid"
+            name="priority"
+            class="mid_prio prio"
+          />
+          <input
+            type="radio"
+            value="high"
+            name="priority"
+            class="high_prio prio"
+          />
+        </div>
         <input type="text" id="task" />
         <button id="submit_task" name="add_item_button">Add</button>
         <button id="edit_task" name="edit_item_button" class="invisible">
           Edit
         </button>
+        <p class="message"></p>
       </div>
       <div>
         <div class="task_list_top_part">
@@ -43,8 +67,7 @@
         <ul id="tasks"></ul>
       </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script> -->
     <script src="assets/scripts/script.js "></script>
   </body>
 </html>
