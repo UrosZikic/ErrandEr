@@ -173,13 +173,13 @@ function display_tasks(task_parameter, priority_value) {
 
   switch (priority_value) {
     case "low":
-      priority_icon.style.backgroundColor = "green";
+      priority_icon.style.backgroundColor = "rgb(47, 158, 68)";
       break;
     case "mid":
-      priority_icon.style.backgroundColor = "yellow";
+      priority_icon.style.backgroundColor = "rgb(255, 165, 0)";
       break;
     case "high":
-      priority_icon.style.backgroundColor = "red";
+      priority_icon.style.backgroundColor = "rgb(201, 42, 42)";
       break;
   }
 

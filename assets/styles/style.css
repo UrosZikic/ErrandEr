@@ -7,7 +7,6 @@
 html {
   font-size: 10px;
   overflow-x: hidden;
-  background-image: url("/assets/images/bodyimage.jpg");
 }
 
 .fas {
@@ -35,7 +34,7 @@ h2 {
 #header {
   position: fixed;
   width: 100%;
-  background-color: transparent;
+  background-color: white;
   z-index: 999;
 }
 #header img {
@@ -75,7 +74,6 @@ main label {
   font-size: 2rem;
   padding-left: 0.5rem;
   font-family: roboto, sans-serif;
-  color: white;
 }
 .prio_container {
   display: flex;
@@ -127,13 +125,13 @@ input[type="radio"]:checked:after {
   border: 2px solid white;
 }
 .low_prio:checked:after {
-  background-color: green;
+  background-color: rgb(47, 158, 68);
 }
 .mid_prio:checked:after {
-  background-color: #ffa500;
+  background-color: rgb(255, 165, 0);
 }
 .high_prio:checked:after {
-  background-color: red;
+  background-color: rgb(201, 42, 42);
 }
 
 main input {
@@ -162,9 +160,6 @@ main button {
   font-size: 1.5rem;
   font-family: roboto, sans-serif;
   color: red;
-}
-.inner_task_holder {
-  background-color: rgba(0, 0, 0, 0.25);
 }
 
 #tasks li {
@@ -195,7 +190,6 @@ input[type="checkbox"] {
 }
 .delete_task,
 .edit_task {
-  color: white;
   font-size: 3rem;
   border: none;
   background-color: transparent;
@@ -227,6 +221,7 @@ input[type="checkbox"] {
 
 .task_actions {
   box-shadow: none !important;
+  display: flex;
 }
 .task_text {
   font-family: roboto, sans-serif;
@@ -238,8 +233,4 @@ input[type="checkbox"] {
   width: 100%;
   overflow-y: hidden;
   background-color: transparent;
-  color: white;
-}
-.prio_text {
-  color: white;
 }
