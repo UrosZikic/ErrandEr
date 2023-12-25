@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+.uni_styles {
+  background-color: black;
+  color: white !important;
+}
+
 html {
   font-size: 10px;
   overflow-x: hidden;
@@ -17,7 +22,30 @@ h2 {
   font-size: 3.2rem;
   font-weight: 400;
   font-family: roboto, sans-serif;
-  color: white;
+}
+#theme_toggle {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  border-radius: 20px;
+}
+.theme_toggle_bubble {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  right: unset;
+  bottom: 0;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: black;
+  transform: translateX(0%);
+  transition: transform 1s;
+}
+.dark_theme_bubble {
+  transform: translateX(26px);
+  background-color: white !important;
 }
 
 .invisible {
@@ -28,7 +56,7 @@ h2 {
   transition: all 1s;
 }
 .red-bucket {
-  color: red;
+  color: rgb(201, 42, 42) !important;
 }
 
 #header {
@@ -44,6 +72,10 @@ h2 {
   max-height: 14rem;
   margin: 1rem 50%;
   transform: translateX(-50%);
+}
+
+#logo_dark {
+  display: none;
 }
 .site_theme_toggle {
   font-size: 5rem;
@@ -125,13 +157,13 @@ input[type="radio"]:checked:after {
   border: 2px solid white;
 }
 .low_prio:checked:after {
-  background-color: rgb(47, 158, 68);
+  background-color: rgb(47, 158, 68) !important;
 }
 .mid_prio:checked:after {
-  background-color: rgb(255, 165, 0);
+  background-color: rgb(255, 165, 0) !important;
 }
 .high_prio:checked:after {
-  background-color: rgb(201, 42, 42);
+  background-color: rgb(201, 42, 42) !important;
 }
 
 main input {
@@ -159,7 +191,7 @@ main button {
   padding-left: 1rem;
   font-size: 1.5rem;
   font-family: roboto, sans-serif;
-  color: red;
+  color: rgb(201, 42, 42) !important;
 }
 
 #tasks li {
@@ -176,6 +208,10 @@ main button {
 
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
+.light_shadow {
+  box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.25) !important;
+}
+
 .inner-list {
   display: flex !important;
   justify-content: space-between;
@@ -198,6 +234,11 @@ input[type="checkbox"] {
 @media only screen and (max-width: 1100px) {
   main {
     grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .task_item_el {
+    flex-direction: column-reverse;
   }
 }
 

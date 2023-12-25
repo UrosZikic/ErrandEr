@@ -24,7 +24,16 @@
   </head>
   <body>
     <header id="header">
-      <img src="assets/images/logo_light.png" alt="website logo" />
+      <img
+        src="assets/images/logo_light.png"
+        alt="website logo"
+        id="logo_light"
+      />
+      <img
+        src="assets/images/logo_dark.png"
+        alt="website logo - dark"
+        id="logo_dark"
+      />
     </header>
     <main>
       <div id="form_container">
@@ -66,6 +75,9 @@
         </div>
         <ul id="tasks"></ul>
       </div>
+      <button id="theme_toggle" onclick="toggle_dark_light_theme()">
+        <div class="theme_toggle_bubble"></div>
+      </button>
     </main>
     <!-- <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script> -->
     <script src="assets/scripts/script.js "></script>

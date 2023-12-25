@@ -403,45 +403,40 @@ const options = {
   autoMatchOsTheme: true,
 };
 
-// function add_dark_mode_widget() {
-//   new Darkmode(options).showWidget();
-//   page_load_theme_color();
-//   // kebab case is necessary because darkmode-toggle is a library class
-//   const dark_mode_toggle_btn = document.querySelector(".darkmode-toggle");
-//   dark_mode_toggle_btn.addEventListener("click", () => {
-//     page_load_theme_color();
-//   });
-// }
-// // load logo
-// const site_header = document.querySelector("#header");
-// const site_header_logo = document.createElement("img");
+function toggle_dark_light_theme() {
+  const uni_selector = document.getElementsByTagName("*");
+  const logo_light = document.querySelector("#logo_light");
+  const logo_dark = document.querySelector("#logo_dark");
+  const single_task_container = document.querySelectorAll(
+    ".single_task_container"
+  );
+  const theme_toggle_bubble = document.querySelector(".theme_toggle_bubble");
 
-// function page_load_theme_color() {
-//   const html_body = document.querySelector("body");
-//   // kebab case is necessary because darkmode--activated is a library class
-//   site_header_logo.src = html_body.classList.contains("darkmode--activated")
-//     ? "assets/images/logo_dark.png"
-//     : "assets/images/logo_light.png";
+  for (let i = 0; i < uni_selector.length; i++) {
+    const element = uni_selector[i];
 
-//   dark_theme_check();
-//   site_header_logo.alt = "website brand logo";
-//   site_header.appendChild(site_header_logo);
-// }
-
-// function dark_theme_check() {
-//   if (
-//     document.querySelector("body").classList.contains("darkmode--activated")
-//   ) {
-//     document.querySelectorAll(".edit_task").classList.add("dark_theme");
-//     document.querySelectorAll(".delete_task").classList.add("dark_theme");
-//     document.querySelectorAll(".task_text").classList.add("dark_theme");
-//     document.querySelector(".prio_text").classList.add("dark_theme");
-//   } else {
-//     document.querySelector(".edit_task").classList.remove("dark_theme");
-//     document.querySelector(".delete_task").classList.remove("dark_theme");
-//     document.querySelector(".task_text").classList.remove("dark_theme");
-//     document.querySelector(".prio_text").classList.remove("dark_theme");
-//   }
-// }
-
-// window.addEventListener("load", add_dark_mode_widget);
+    if (element.classList.contains("uni_styles")) {
+      element.classList.remove("uni_styles");
+      document.querySelector("#task").style.border = "1px solid black";
+      document.querySelector("#header").style.backgroundColor = "white";
+      logo_light.style.display = "block";
+      logo_dark.style.display = "none";
+      single_task_container.forEach((task) => {
+        task.classList.remove("light_shadow");
+      });
+      theme_toggle_bubble.classList.remove("dark_theme_bubble");
+      document.querySelector("#theme_toggle").style.border = "1px solid black";
+    } else {
+      element.classList.add("uni_styles");
+      document.querySelector("#task").style.border = "1px solid white";
+      document.querySelector("#header").style.backgroundColor = "black";
+      logo_light.style.display = "none";
+      logo_dark.style.display = "block";
+      single_task_container.forEach((task) => {
+        task.classList.add("light_shadow");
+      });
+      theme_toggle_bubble.classList.add("dark_theme_bubble");
+      document.querySelector("#theme_toggle").style.border = "1px solid white";
+    }
+  }
+}
