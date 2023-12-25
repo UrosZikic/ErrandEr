@@ -83,7 +83,9 @@ function add_task() {
     localStorage.setItem("global_tasks", task_collection);
 
     // display tasks
+
     display_tasks(new_task, new_priority);
+
     // clean input text
     priority_range.forEach((radio_button) => (radio_button.checked = false));
     message.textContent = "";
@@ -221,6 +223,39 @@ function display_tasks(task_parameter, priority_value) {
   task_holder.appendChild(task_item_unordered_list);
   task_holder.appendChild(priority_container);
   task_display.appendChild(task_holder);
+
+  if (
+    document.querySelector("#header").style.backgroundColor === "rgb(0, 0, 0)"
+  ) {
+    document.querySelectorAll(".single_task_container").forEach((task) => {
+      task.classList.add("light_shadow");
+    });
+
+    document.querySelectorAll(".task_text").forEach((task) => {
+      task.classList.add("uni_styles");
+    });
+    document.querySelectorAll(".delete_task").forEach((task) => {
+      task.classList.add("uni_styles");
+    });
+    document.querySelectorAll(".edit_task").forEach((task) => {
+      task.classList.add("uni_styles");
+    });
+  } else {
+    console.log(false);
+    document.querySelectorAll(".single_task_container").forEach((task) => {
+      task.classList.remove("light_shadow");
+    });
+
+    document.querySelectorAll(".task_text").forEach((task) => {
+      task.classList.remove("uni_styles");
+    });
+    document.querySelectorAll(".delete_task").forEach((task) => {
+      task.classList.remove("uni_styles");
+    });
+    document.querySelectorAll(".edit_task").forEach((task) => {
+      task.classList.remove("uni_styles");
+    });
+  }
 
   // retrive DOM element index number
   const task_holder_index = Array.from(task_display.children).indexOf(
@@ -418,18 +453,41 @@ function toggle_dark_light_theme() {
     if (element.classList.contains("uni_styles")) {
       element.classList.remove("uni_styles");
       document.querySelector("#task").style.border = "1px solid black";
-      document.querySelector("#header").style.backgroundColor = "white";
+      document.querySelector("#header").style.backgroundColor =
+        "rgb(255, 255, 255)";
       logo_light.style.display = "block";
       logo_dark.style.display = "none";
       single_task_container.forEach((task) => {
         task.classList.remove("light_shadow");
+        task.classList.remove("uni_styles");
+      });
+      document.querySelectorAll(".task_item_el").forEach((task) => {
+        task.classList.remove("uni_styles");
+      });
+      document.querySelectorAll("ul").forEach((task) => {
+        task.classList.remove("uni_styles");
+      });
+      document.querySelectorAll(".task_actions").forEach((task) => {
+        task.classList.remove("uni_styles");
+      });
+      document.querySelectorAll(".fas").forEach((task) => {
+        task.classList.remove("uni_styles");
+      });
+      document.querySelectorAll(".prio_task_container").forEach((task) => {
+        task.classList.remove("uni_styles");
+      });
+      document.querySelectorAll(".prio_text").forEach((task) => {
+        task.classList.remove("uni_styles");
+      });
+      document.querySelectorAll(".prio_icon").forEach((task) => {
+        task.classList.remove("uni_styles");
       });
       theme_toggle_bubble.classList.remove("dark_theme_bubble");
       document.querySelector("#theme_toggle").style.border = "1px solid black";
     } else {
       element.classList.add("uni_styles");
       document.querySelector("#task").style.border = "1px solid white";
-      document.querySelector("#header").style.backgroundColor = "black";
+      document.querySelector("#header").style.backgroundColor = "rgb(0, 0, 0)";
       logo_light.style.display = "none";
       logo_dark.style.display = "block";
       single_task_container.forEach((task) => {
