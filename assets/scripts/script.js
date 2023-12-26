@@ -75,7 +75,7 @@ function add_task() {
     }
   });
 
-  if (new_task && new_task.length <= 50 && new_priority) {
+  if (new_task && new_priority) {
     // add task
     priority_collection.push(new_priority);
     localStorage.setItem("global_priorities", priority_collection);
@@ -93,8 +93,6 @@ function add_task() {
   } else {
     if (!new_task) {
       message.textContent = "You Can't create an empty task!";
-    } else if (new_task.length > 50) {
-      message.textContent = "A task can't contain more than 50 letters!";
     } else {
       message.textContent = "Please select a priority!";
     }

@@ -26,11 +26,8 @@ addTask(): Adds a new task to the collection, updates localStorage, and displays
 
 display_tasks(): Displays a task in the HTML document as a list item.
 
+delete_task/delete_many_tasks/delete_all_tasks() -> there are 3 functions, one for individual task deletion, another for multi task deletion of the selected tasks and the final complete task list deletion.
+
+toggle_dark_light_theme() -> a function that seamlessly switches between light and dark website themes for better user experience
+
 Event Listeners: Listens for clicks on the "Submit" button and the "Enter" key to add tasks.
-
-Best Practices
-Variables use const and let appropriately for better scoping.
-
-localStorage usage is encapsulated, and potential errors are considered.
-
-Comments provide clarity on the purpose of each function.
