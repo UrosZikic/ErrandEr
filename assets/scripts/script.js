@@ -146,6 +146,7 @@ function edit_task(target_task, target_index) {
       edit_task_button.classList.add("invisible");
       submit_task_button.classList.remove("invisible");
       task_input.value = "";
+      priority_range.forEach((priority) => (priority.checked = false));
     };
   }
 }
