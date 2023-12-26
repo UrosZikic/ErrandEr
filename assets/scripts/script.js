@@ -28,6 +28,12 @@ let id = 0;
     priority_collection.push(...string_to_priority);
   }
 
+  if (task_collection.length === 0) {
+    document.querySelector("#delete_all_tasks").style.display = "none";
+  } else {
+    document.querySelector("#delete_all_tasks").style.display = "block";
+  }
+
   // display tasks
   task_collection.forEach((task, index) => {
     display_tasks(task, priority_collection[index]);
@@ -48,6 +54,12 @@ let id = 0;
 
         task_collection = [];
         localStorage.setItem("global_tasks", task_collection);
+
+        if (task_display.firstChild === null) {
+          document.querySelector("#delete_all_tasks").style.display = "none";
+        } else {
+          document.querySelector("#delete_all_tasks").style.display = "block";
+        }
 
         // display tasks
         task_collection.forEach((task) => {
@@ -153,6 +165,12 @@ function edit_task(target_task, target_index) {
 
 // display_task function collected data translates into a list
 function display_tasks(task_parameter, priority_value) {
+  if (task_collection.length === 0) {
+    document.querySelector("#delete_all_tasks").style.display = "none";
+  } else {
+    document.querySelector("#delete_all_tasks").style.display = "block";
+  }
+
   id += 1;
   const task_holder = document.createElement("li");
   const task_actions = document.createElement("div");
@@ -291,6 +309,12 @@ function display_tasks(task_parameter, priority_value) {
       localStorage.setItem("global_tasks", task_collection);
       localStorage.setItem("global_priorities", priority_collection);
 
+      if (task_display.firstChild === null) {
+        document.querySelector("#delete_all_tasks").style.display = "none";
+      } else {
+        document.querySelector("#delete_all_tasks").style.display = "block";
+      }
+
       // display tasks
       task_collection.forEach((task, index) => {
         display_tasks(task, priority_collection[index]);
@@ -388,6 +412,12 @@ function delete_many_tasks(selected_items) {
 
     localStorage.setItem("global_tasks", task_collection);
     localStorage.setItem("global_priorities", priority_collection);
+
+    if (task_display.firstChild === null) {
+      document.querySelector("#delete_all_tasks").style.display = "none";
+    } else {
+      document.querySelector("#delete_all_tasks").style.display = "block";
+    }
 
     // display tasks
     task_collection.forEach((task, index) => {
