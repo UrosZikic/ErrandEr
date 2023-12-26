@@ -28,11 +28,7 @@ let id = 0;
     priority_collection.push(...string_to_priority);
   }
 
-  if (task_collection.length === 0) {
-    document.querySelector("#delete_all_tasks").style.display = "none";
-  } else {
-    document.querySelector("#delete_all_tasks").style.display = "block";
-  }
+  check_task_number();
 
   // display tasks
   task_collection.forEach((task, index) => {
@@ -55,11 +51,7 @@ let id = 0;
         task_collection = [];
         localStorage.setItem("global_tasks", task_collection);
 
-        if (task_display.firstChild === null) {
-          document.querySelector("#delete_all_tasks").style.display = "none";
-        } else {
-          document.querySelector("#delete_all_tasks").style.display = "block";
-        }
+        check_task_number();
 
         // display tasks
         task_collection.forEach((task) => {
@@ -165,11 +157,7 @@ function edit_task(target_task, target_index) {
 
 // display_task function collected data translates into a list
 function display_tasks(task_parameter, priority_value) {
-  if (task_collection.length === 0) {
-    document.querySelector("#delete_all_tasks").style.display = "none";
-  } else {
-    document.querySelector("#delete_all_tasks").style.display = "block";
-  }
+  check_task_number();
 
   id += 1;
   const task_holder = document.createElement("li");
@@ -309,11 +297,7 @@ function display_tasks(task_parameter, priority_value) {
       localStorage.setItem("global_tasks", task_collection);
       localStorage.setItem("global_priorities", priority_collection);
 
-      if (task_display.firstChild === null) {
-        document.querySelector("#delete_all_tasks").style.display = "none";
-      } else {
-        document.querySelector("#delete_all_tasks").style.display = "block";
-      }
+      check_task_number();
 
       // display tasks
       task_collection.forEach((task, index) => {
@@ -413,11 +397,7 @@ function delete_many_tasks(selected_items) {
     localStorage.setItem("global_tasks", task_collection);
     localStorage.setItem("global_priorities", priority_collection);
 
-    if (task_display.firstChild === null) {
-      document.querySelector("#delete_all_tasks").style.display = "none";
-    } else {
-      document.querySelector("#delete_all_tasks").style.display = "block";
-    }
+    check_task_number();
 
     // display tasks
     task_collection.forEach((task, index) => {
@@ -510,5 +490,13 @@ function toggle_dark_light_theme() {
       theme_toggle_bubble.classList.add("dark_theme_bubble");
       document.querySelector("#theme_toggle").style.border = "1px solid white";
     }
+  }
+}
+
+function check_task_number() {
+  if (task_collection.length === 0) {
+    document.querySelector("#delete_all_tasks").style.display = "none";
+  } else {
+    document.querySelector("#delete_all_tasks").style.display = "block";
   }
 }
