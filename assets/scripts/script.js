@@ -93,8 +93,10 @@ function add_task() {
   } else {
     if (!new_task) {
       message.textContent = "You Can't create an empty task!";
+    } else if (new_task.length > 50) {
+      message.textContent = "A task can't contain more than 50 letters!";
     } else {
-      message.textContent = "A task can't contain more than 50 letters";
+      message.textContent = "Please select a priority!";
     }
   }
 }
@@ -420,23 +422,6 @@ document.addEventListener("keyup", (e) => {
     }
   }
 });
-
-// localStorage.clear();
-
-// DARK MODE TOGGLE
-const options = {
-  bottom: "64px",
-  right: "unset",
-  left: "32px",
-  time: "0s",
-  mixColor: "#fff",
-  backgroundColor: "#fff",
-  buttonColorDark: "#100f2c",
-  buttonColorLight: "#fff",
-  saveInCookies: true,
-  label: "🌓",
-  autoMatchOsTheme: true,
-};
 
 function toggle_dark_light_theme() {
   const uni_selector = document.getElementsByTagName("*");
