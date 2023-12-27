@@ -33,7 +33,7 @@ let id = 0;
   task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
   // display tasks
   task_collection.forEach((task, index) => {
-    display_tasks(task, priority_collection[index]);
+    display_tasks(task, priority_collection[index], true);
   });
 
   // delete all tasks
@@ -61,7 +61,7 @@ let id = 0;
           .querySelector("#inner_task_holder")
           .classList.remove("inner_task_holder");
         task_collection.forEach((task) => {
-          display_tasks(task);
+          display_tasks(task, null, true);
         });
       } else {
         return null;
@@ -94,7 +94,7 @@ function add_task() {
 
     // display tasks
 
-    display_tasks(new_task, new_priority);
+    display_tasks(new_task, new_priority, true);
 
     // clean input text
     priority_range.forEach((radio_button) => (radio_button.checked = false));
@@ -110,6 +110,8 @@ function add_task() {
 }
 // edit an existing task
 function edit_task(target_task, target_index) {
+  const task_item_el = document.querySelectorAll(".single_task_container");
+
   task_input.value = target_task;
   const target_priority_value = priority_collection[target_index];
   let new_priority_value;
@@ -140,16 +142,27 @@ function edit_task(target_task, target_index) {
             }
           });
           priority_collection[index] = new_priority_value;
+          // add successful edit style
+
+          task_item_el[target_index].classList.add("edit_success");
+
+          setTimeout(() => {
+            task_item_el[target_index].classList.remove("edit_success");
+          }, 500);
+
           // resets the list
-          while (task_display.firstChild) {
-            task_display.removeChild(task_display.firstChild);
-          }
-          localStorage.setItem("global_tasks", task_collection);
-          localStorage.setItem("global_priorities", priority_collection);
-          // appends a new list
-          task_collection.forEach((task, index) => {
-            display_tasks(task, priority_collection[index]);
-          });
+          setTimeout(() => {
+            while (task_display.firstChild) {
+              task_display.removeChild(task_display.firstChild);
+            }
+            localStorage.setItem("global_tasks", task_collection);
+            localStorage.setItem("global_priorities", priority_collection);
+
+            // appends a new list
+            task_collection.forEach((task, index) => {
+              display_tasks(task, priority_collection[index]);
+            });
+          }, 900);
         }
       });
       // return to default
@@ -162,7 +175,11 @@ function edit_task(target_task, target_index) {
 }
 
 // display_task function collected data translates into a list
-function display_tasks(task_parameter, priority_value) {
+function display_tasks(
+  task_parameter,
+  priority_value,
+  animation_authorization
+) {
   check_task_number();
   document
     .querySelector("#inner_task_holder")
@@ -203,8 +220,9 @@ function display_tasks(task_parameter, priority_value) {
   }
 
   task_holder.classList.add("single_task_container");
-  task_holder.classList.add("single_task_container_two");
-
+  if (animation_authorization) {
+    task_holder.classList.add("single_task_container_two");
+  }
   task_actions.className = "task_actions";
 
   task_single_selector.type = "checkbox";
@@ -249,7 +267,7 @@ function display_tasks(task_parameter, priority_value) {
     document
       .querySelector("#inner_task_holder")
       .classList.add("inner_task_holder");
-  }, 500);
+  }, 350);
 
   if (
     document.querySelector("#header").style.backgroundColor === "rgb(0, 0, 0)"

@@ -48,6 +48,9 @@ h2 {
   transform: translateX(26px);
   background-color: white !important;
 }
+.edit_success {
+  background-color: #2b8a3e;
+}
 
 .invisible {
   display: none !important;
@@ -267,7 +270,7 @@ input[type="checkbox"] {
   gap: 1rem;
   cursor: grab;
 
-  transition: transform 1s, opacity 1s;
+  transition: transform 1s, opacity 1s, background-color 1s;
 }
 .single_task_container_two {
   transform: translateY(20%);
