@@ -22,6 +22,7 @@ h2 {
   font-size: 3.2rem;
   font-weight: 400;
   font-family: roboto, sans-serif;
+  color: #6b0bf5;
 }
 #theme_toggle {
   position: fixed;

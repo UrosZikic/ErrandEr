@@ -7,6 +7,7 @@ const task_display = document.getElementById("tasks");
 const task_multi_selector = document.getElementById("task_multi_selector");
 const delete_all_tasks_btn = document.querySelector("#delete_all_tasks");
 const priority_range = document.querySelectorAll(".prio");
+let task_header = document.querySelector(".errand_header");
 
 let task_collection = [];
 let priority_collection = [];
@@ -29,7 +30,7 @@ let id = 0;
   }
 
   check_task_number();
-
+  task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
   // display tasks
   task_collection.forEach((task, index) => {
     display_tasks(task, priority_collection[index]);
@@ -52,6 +53,7 @@ let id = 0;
         localStorage.setItem("global_tasks", task_collection);
 
         check_task_number();
+        task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
 
         // display tasks
 
@@ -166,6 +168,7 @@ function display_tasks(task_parameter, priority_value) {
     .querySelector("#inner_task_holder")
     .classList.remove("inner_task_holder");
   id += 1;
+  task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
 
   const task_holder = document.createElement("li");
   const task_actions = document.createElement("div");
@@ -315,7 +318,7 @@ function display_tasks(task_parameter, priority_value) {
       localStorage.setItem("global_priorities", priority_collection);
 
       check_task_number();
-
+      task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
       // display tasks
       if (task_collection.length === 0) {
         document
@@ -359,7 +362,6 @@ function display_tasks(task_parameter, priority_value) {
           items_to_delete_container.push(checkbox_index);
         }
       });
-      console.log(items_to_delete_container);
     };
   });
 
@@ -421,7 +423,7 @@ function delete_many_tasks(selected_items) {
     localStorage.setItem("global_priorities", priority_collection);
 
     check_task_number();
-
+    task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
     // display tasks
     if (task_collection.length === 0) {
       document
