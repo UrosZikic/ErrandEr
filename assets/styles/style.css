@@ -256,6 +256,12 @@ input[type="checkbox"] {
   grid-template-columns: 30px 1fr;
   gap: 1rem;
   cursor: grab;
+
+  transition: all 1s;
+}
+.single_task_container_two {
+  transform: translateY(20%);
+  opacity: 0;
 }
 
 .task_actions {

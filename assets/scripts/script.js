@@ -193,6 +193,7 @@ function display_tasks(task_parameter, priority_value) {
   }
 
   task_holder.classList.add("single_task_container");
+  task_holder.classList.add("single_task_container_two");
 
   task_actions.className = "task_actions";
 
@@ -230,6 +231,10 @@ function display_tasks(task_parameter, priority_value) {
   task_holder.appendChild(task_item_unordered_list);
   task_holder.appendChild(priority_container);
   task_display.appendChild(task_holder);
+
+  setTimeout(() => {
+    task_holder.classList.remove("single_task_container_two");
+  }, 150);
 
   if (
     document.querySelector("#header").style.backgroundColor === "rgb(0, 0, 0)"
