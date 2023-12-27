@@ -178,7 +178,7 @@ function display_tasks(task_parameter, priority_value) {
   const task_selector_label = document.createElement("label");
   const task_single_selector = document.createElement("input");
   const task_item_unordered_list = document.createElement("ul");
-  const task_text = document.createElement("textarea");
+  const task_text = document.createElement("p");
 
   const priority_container = document.createElement("div");
   const priority_text = document.createElement("p");
