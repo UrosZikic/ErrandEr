@@ -509,6 +509,9 @@ function toggle_dark_light_theme() {
       });
       theme_toggle_bubble.classList.remove("dark_theme_bubble");
       document.querySelector("#theme_toggle").style.border = "1px solid black";
+      document
+        .querySelector("#inner_task_holder")
+        .classList.remove("light_shadow");
     } else {
       element.classList.add("uni_styles");
       document.querySelector("#task").style.border = "1px solid white";
@@ -520,6 +523,9 @@ function toggle_dark_light_theme() {
       });
       theme_toggle_bubble.classList.add("dark_theme_bubble");
       document.querySelector("#theme_toggle").style.border = "1px solid white";
+      document
+        .querySelector("#inner_task_holder")
+        .classList.add("light_shadow");
     }
   }
 }

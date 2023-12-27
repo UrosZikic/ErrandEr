@@ -100,7 +100,7 @@ main {
 }
 #inner_task_holder {
   padding: 1rem;
-  transition: all 1s;
+  transition: box-shadow 1.5s ease-in-out;
 }
 .inner_task_holder {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
@@ -242,6 +242,9 @@ input[type="checkbox"] {
   .task_actions {
     align-self: end;
   }
+  h2 {
+    font-size: 2.2rem !important;
+  }
 }
 
 .task_list_top_part {
@@ -261,7 +264,7 @@ input[type="checkbox"] {
   gap: 1rem;
   cursor: grab;
 
-  transition: all 1s;
+  transition: transform 1s, opacity 1s;
 }
 .single_task_container_two {
   transform: translateY(20%);
