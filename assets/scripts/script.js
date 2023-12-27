@@ -113,6 +113,7 @@ function edit_task(target_task, target_index) {
   const task_item_el = document.querySelectorAll(".single_task_container");
 
   task_input.value = target_task;
+
   const target_priority_value = priority_collection[target_index];
   let new_priority_value;
 
@@ -127,44 +128,49 @@ function edit_task(target_task, target_index) {
     edit_task_button.classList.remove("invisible");
     submit_task_button.classList.add("invisible");
     edit_task_button.onclick = () => {
-      // console.log("success");
-      task_collection.filter((task, index) => {
-        if (index === target_index) {
-          console.log(index, target_index);
-          // takes the edit input text
-          const new_input_value = task_input.value;
-          //substitutes the target task's previous value with a new value
-          task_collection[index] = new_input_value;
-          // takes the new priority value
-          priority_range.forEach((priority) => {
-            if (priority.checked === true) {
-              new_priority_value = priority.value;
-            }
-          });
-          priority_collection[index] = new_priority_value;
-          // add successful edit style
-
-          task_item_el[target_index].classList.add("edit_success");
-
-          setTimeout(() => {
-            task_item_el[target_index].classList.remove("edit_success");
-          }, 500);
-
-          // resets the list
-          setTimeout(() => {
-            while (task_display.firstChild) {
-              task_display.removeChild(task_display.firstChild);
-            }
-            localStorage.setItem("global_tasks", task_collection);
-            localStorage.setItem("global_priorities", priority_collection);
-
-            // appends a new list
-            task_collection.forEach((task, index) => {
-              display_tasks(task, priority_collection[index]);
+      if (task_input.value.length !== 0) {
+        document.querySelector(".message").innerHTML = "";
+        task_collection.filter((task, index) => {
+          if (index === target_index) {
+            console.log(index, target_index);
+            // takes the edit input text
+            const new_input_value = task_input.value;
+            //substitutes the target task's previous value with a new value
+            task_collection[index] = new_input_value;
+            // takes the new priority value
+            priority_range.forEach((priority) => {
+              if (priority.checked === true) {
+                new_priority_value = priority.value;
+              }
             });
-          }, 900);
-        }
-      });
+            priority_collection[index] = new_priority_value;
+            // add successful edit style
+
+            task_item_el[target_index].classList.add("edit_success");
+
+            setTimeout(() => {
+              task_item_el[target_index].classList.remove("edit_success");
+            }, 500);
+
+            // resets the list
+            setTimeout(() => {
+              while (task_display.firstChild) {
+                task_display.removeChild(task_display.firstChild);
+              }
+              localStorage.setItem("global_tasks", task_collection);
+              localStorage.setItem("global_priorities", priority_collection);
+
+              // appends a new list
+              task_collection.forEach((task, index) => {
+                display_tasks(task, priority_collection[index]);
+              });
+            }, 900);
+          }
+        });
+      } else {
+        document.querySelector(".message").innerHTML =
+          "Edited errand can't be empty!";
+      }
       // return to default
       edit_task_button.classList.add("invisible");
       submit_task_button.classList.remove("invisible");
