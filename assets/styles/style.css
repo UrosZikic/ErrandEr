@@ -97,9 +97,12 @@ main {
   display: grid;
   grid-template-columns: 1fr;
 }
-main div:nth-child(2) {
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+#inner_task_holder {
   padding: 1rem;
+  transition: all 1s;
+}
+.inner_task_holder {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 main label {

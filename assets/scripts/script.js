@@ -54,6 +54,10 @@ let id = 0;
         check_task_number();
 
         // display tasks
+
+        document
+          .querySelector("#inner_task_holder")
+          .classList.remove("inner_task_holder");
         task_collection.forEach((task) => {
           display_tasks(task);
         });
@@ -158,8 +162,11 @@ function edit_task(target_task, target_index) {
 // display_task function collected data translates into a list
 function display_tasks(task_parameter, priority_value) {
   check_task_number();
-
+  document
+    .querySelector("#inner_task_holder")
+    .classList.remove("inner_task_holder");
   id += 1;
+
   const task_holder = document.createElement("li");
   const task_actions = document.createElement("div");
   const task_delete_button = document.createElement("button");
@@ -235,6 +242,11 @@ function display_tasks(task_parameter, priority_value) {
   setTimeout(() => {
     task_holder.classList.remove("single_task_container_two");
   }, 150);
+  setTimeout(() => {
+    document
+      .querySelector("#inner_task_holder")
+      .classList.add("inner_task_holder");
+  }, 500);
 
   if (
     document.querySelector("#header").style.backgroundColor === "rgb(0, 0, 0)"
@@ -305,9 +317,15 @@ function display_tasks(task_parameter, priority_value) {
       check_task_number();
 
       // display tasks
-      task_collection.forEach((task, index) => {
-        display_tasks(task, priority_collection[index]);
-      });
+      if (task_collection.length === 0) {
+        document
+          .querySelector("#inner_task_holder")
+          .classList.remove("inner_task_holder");
+      } else {
+        task_collection.forEach((task, index) => {
+          display_tasks(task, priority_collection[index]);
+        });
+      }
     }, 350);
     task_input.value = "";
   };
@@ -405,9 +423,15 @@ function delete_many_tasks(selected_items) {
     check_task_number();
 
     // display tasks
-    task_collection.forEach((task, index) => {
-      display_tasks(task, priority_collection[index]);
-    });
+    if (task_collection.length === 0) {
+      document
+        .querySelector("#inner_task_holder")
+        .classList.remove("inner_task_holder");
+    } else {
+      task_collection.forEach((task, index) => {
+        display_tasks(task, priority_collection[index]);
+      });
+    }
 
     document.querySelector("#task_multi_selector").classList.add("invisible");
     delete_all_tasks_btn.classList.remove("invisible");
