@@ -4,11 +4,6 @@
   box-sizing: border-box;
 }
 
-.uni_styles {
-  background-color: black;
-  color: white !important;
-}
-
 html {
   font-size: 10px;
   overflow-x: hidden;
@@ -172,7 +167,11 @@ input[type="radio"]:checked:after {
 .high_prio:checked:after {
   background-color: rgb(201, 42, 42) !important;
 }
-
+.actions_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+}
 main input {
   font-size: 1.6rem;
   padding: 1rem;
@@ -194,11 +193,11 @@ main button {
 #form_container {
   padding-top: 0.5rem;
 }
-#form_container p {
+.message {
   padding-left: 1rem;
   font-size: 1.5rem;
   font-family: roboto, sans-serif;
-  color: rgb(201, 42, 42) !important;
+  color: rgb(201, 42, 42);
 }
 
 #tasks li {
@@ -251,6 +250,10 @@ input[type="checkbox"] {
   .task_text {
     font-size: 1.4rem !important;
   }
+  .actions_container {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .task_list_top_part {
@@ -268,7 +271,6 @@ input[type="checkbox"] {
   display: grid;
   grid-template-columns: 30px 1fr;
   gap: 1rem;
-  cursor: grab;
 
   transition: transform 1s, opacity 1s, background-color 1s;
 }
@@ -292,4 +294,43 @@ input[type="checkbox"] {
   overflow-y: hidden;
   background-color: transparent;
   word-break: break-all;
+}
+
+.filter_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 160px;
+  overflow: hidden;
+}
+.filter_container button {
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+  width: 100%;
+  z-index: 0;
+  transform: translateY(-500%);
+  transition: transform 0.5s;
+  background-color: white;
+  cursor: pointer;
+}
+.filter_container:hover button {
+  transform: translateY(0%);
+}
+.priority_title {
+  color: black !important;
+  font-size: 1.7rem !important;
+  font-family: roboto, sans-serif;
+  border: 1px solid black;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0rem;
+  z-index: 2;
+  background-color: white;
+}
+.uni_styles {
+  background-color: black;
+  color: white !important;
 }

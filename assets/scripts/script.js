@@ -52,6 +52,9 @@ let id = 0;
         task_collection = [];
         localStorage.setItem("global_tasks", task_collection);
 
+        priority_collection = [];
+        localStorage.setItem("global_priorities", priority_collection);
+
         check_task_number();
         task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
 
@@ -333,10 +336,10 @@ function display_tasks(
       task_collection = task_collection.filter(
         (task, index) => index !== task_holder_index
       );
-      priority_collection +
-        priority_collection.filter((priority, index) => {
-          index !== task_holder_index;
-        });
+      priority_collection = priority_collection.filter(
+        (priority, index) => index !== task_holder_index
+      );
+      console.log(priority_collection, "current collection");
 
       localStorage.setItem("global_tasks", task_collection);
       localStorage.setItem("global_priorities", priority_collection);
@@ -487,6 +490,53 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
+function filter_priority(priority) {
+  let high_prio_container = [];
+  let mid_prio_container = [];
+  let low_prio_container = [];
+  priority_collection.forEach((priority, index) => {
+    if (priority === "high") {
+      high_prio_container.push(index);
+    } else if (priority === "mid") {
+      mid_prio_container.push(index);
+    } else {
+      low_prio_container.push(index);
+    }
+  });
+  let priority_collection_filtered = [];
+
+  while (task_display.firstChild) {
+    task_display.removeChild(task_display.firstChild);
+  }
+
+  priority_collection_filtered.push(...high_prio_container);
+  priority_collection_filtered.push(...mid_prio_container);
+  priority_collection_filtered.push(...low_prio_container);
+
+  if (priority === "high") {
+    for (let i = 0; i < task_collection.length; i++) {
+      display_tasks(
+        task_collection[priority_collection_filtered[i]],
+        priority_collection[priority_collection_filtered[i]],
+        true
+      );
+    }
+  } else if (priority === "low") {
+    priority_collection_filtered = priority_collection_filtered.reverse();
+    for (let i = 0; i < task_collection.length; i++) {
+      display_tasks(
+        task_collection[priority_collection_filtered[i]],
+        priority_collection[priority_collection_filtered[i]],
+        true
+      );
+    }
+  } else {
+    for (let i = 0; i < task_collection.length; i++) {
+      display_tasks(task_collection[i], priority_collection[i], true);
+    }
+  }
+}
+
 function toggle_dark_light_theme() {
   const uni_selector = document.getElementsByTagName("*");
   const logo_light = document.querySelector("#logo_light");
@@ -536,10 +586,17 @@ function toggle_dark_light_theme() {
       document
         .querySelector("#inner_task_holder")
         .classList.remove("light_shadow");
+      document
+        .querySelectorAll(".filter_container button")
+        .forEach((item) => (item.style.backgroundColor = "rgb(255, 255, 255)"));
     } else {
       element.classList.add("uni_styles");
       document.querySelector("#task").style.border = "1px solid white";
       document.querySelector("#header").style.backgroundColor = "rgb(0, 0, 0)";
+      document.querySelectorAll(".filter_container button").forEach((item) => {
+        item.style.backgroundColor = "rgb(0, 0, 0)";
+        item.style.border = "1px solid rgb(255, 255, 255)";
+      });
       logo_light.style.display = "none";
       logo_dark.style.display = "block";
       single_task_container.forEach((task) => {

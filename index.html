@@ -65,12 +65,22 @@
             id="high_prio"
           />
         </div>
-        <input type="text" id="task" />
-        <button id="submit_task" name="add_item_button">Add</button>
-        <button id="edit_task" name="edit_item_button" class="invisible">
-          Edit
-        </button>
-        <p class="message"></p>
+        <div class="actions_container">
+          <div>
+            <input type="text" id="task" />
+            <button id="submit_task" name="add_item_button">Add</button>
+            <button id="edit_task" name="edit_item_button" class="invisible">
+              Edit
+            </button>
+            <p class="message"></p>
+          </div>
+          <div class="filter_container">
+            <p class="priority_title">Filter by priority</p>
+            <button onclick="filter_priority('high')">Highest priority</button>
+            <button onclick="filter_priority()">Default list</button>
+            <button onclick="filter_priority('low')">Low priority</button>
+          </div>
+        </div>
       </div>
       <div id="inner_task_holder">
         <div class="task_list_top_part">
