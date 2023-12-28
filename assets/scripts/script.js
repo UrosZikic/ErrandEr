@@ -535,6 +535,11 @@ function filter_priority(priority) {
       display_tasks(task_collection[i], priority_collection[i], true);
     }
   }
+  if (priority) {
+    document.querySelector(
+      ".errand_header"
+    ).innerHTML = `Errand List: (${task_collection.length}) active tasks - filter by priority: ${priority} priority`;
+  }
 }
 
 function toggle_dark_light_theme() {
