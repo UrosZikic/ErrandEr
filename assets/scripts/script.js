@@ -12,6 +12,9 @@ let task_header = document.querySelector(".errand_header");
 let task_collection = [];
 let priority_collection = [];
 let items_to_delete_container = [];
+// let filtered_tasks_low_priority = [];
+// let filtered_priority_low = [];
+
 let id = 0;
 
 // On page load - collect tasks
@@ -63,6 +66,7 @@ let id = 0;
         document
           .querySelector("#inner_task_holder")
           .classList.remove("inner_task_holder");
+
         task_collection.forEach((task) => {
           display_tasks(task, null, true);
         });
@@ -196,6 +200,8 @@ function display_tasks(
   id += 1;
   task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
 
+  console.log(task_collection);
+
   const task_holder = document.createElement("li");
   const task_actions = document.createElement("div");
   const task_delete_button = document.createElement("button");
@@ -216,6 +222,8 @@ function display_tasks(
   priority_text.textContent = priority_value + " priority";
   priority_icon.className = "prio_icon";
 
+  console.log(task_collection);
+
   switch (priority_value) {
     case "low":
       priority_icon.style.backgroundColor = "rgb(47, 158, 68)";
@@ -227,6 +235,8 @@ function display_tasks(
       priority_icon.style.backgroundColor = "rgb(201, 42, 42)";
       break;
   }
+
+  console.log(task_collection);
 
   task_holder.classList.add("single_task_container");
   if (animation_authorization) {
@@ -269,6 +279,8 @@ function display_tasks(
   task_holder.appendChild(priority_container);
   task_display.appendChild(task_holder);
 
+  console.log(task_collection);
+
   setTimeout(() => {
     task_holder.classList.remove("single_task_container_two");
   }, 150);
@@ -277,6 +289,8 @@ function display_tasks(
       .querySelector("#inner_task_holder")
       .classList.add("inner_task_holder");
   }, 350);
+
+  console.log(task_collection);
 
   if (
     document.querySelector("#header").style.backgroundColor === "rgb(0, 0, 0)"
@@ -295,7 +309,6 @@ function display_tasks(
       task.classList.add("uni_styles");
     });
   } else {
-    console.log(false);
     document.querySelectorAll(".single_task_container").forEach((task) => {
       task.classList.remove("light_shadow");
     });
@@ -310,6 +323,8 @@ function display_tasks(
       task.classList.remove("uni_styles");
     });
   }
+
+  console.log(task_collection);
 
   // retrive DOM element index number
   const task_holder_index = Array.from(task_display.children).indexOf(
@@ -339,7 +354,7 @@ function display_tasks(
       priority_collection = priority_collection.filter(
         (priority, index) => index !== task_holder_index
       );
-      console.log(priority_collection, "current collection");
+      console.log(task_collection, "current collection");
 
       localStorage.setItem("global_tasks", task_collection);
       localStorage.setItem("global_priorities", priority_collection);
@@ -491,44 +506,53 @@ document.addEventListener("keyup", (e) => {
 });
 
 function filter_priority(priority) {
-  let high_prio_container = [];
-  let mid_prio_container = [];
-  let low_prio_container = [];
-  priority_collection.forEach((priority, index) => {
-    if (priority === "high") {
-      high_prio_container.push(index);
-    } else if (priority === "mid") {
-      mid_prio_container.push(index);
-    } else {
-      low_prio_container.push(index);
-    }
-  });
-  let priority_collection_filtered = [];
-
   while (task_display.firstChild) {
     task_display.removeChild(task_display.firstChild);
   }
+  let filtered_tasks_high_priority = [];
+  let priority_collection_filtered = [];
+
+  let high_prio_container = [];
+  let mid_prio_container = [];
+  let low_prio_container = [];
+
+  let filtered_task_collection_high = [];
+  let filtered_task_collection_mid = [];
+  let filtered_task_collection_low = [];
+
+  priority_collection.forEach((priority, index) => {
+    if (priority === "high") {
+      high_prio_container.push(priority);
+      filtered_task_collection_high.push(task_collection[index]);
+    } else if (priority === "mid") {
+      mid_prio_container.push(priority);
+      filtered_task_collection_mid.push(task_collection[index]);
+    } else {
+      low_prio_container.push(priority);
+      filtered_task_collection_low.push(task_collection[index]);
+    }
+  });
+  filtered_tasks_high_priority.push(...filtered_task_collection_high);
+  filtered_tasks_high_priority.push(...filtered_task_collection_mid);
+  filtered_tasks_high_priority.push(...filtered_task_collection_low);
 
   priority_collection_filtered.push(...high_prio_container);
   priority_collection_filtered.push(...mid_prio_container);
   priority_collection_filtered.push(...low_prio_container);
 
+  console.log(task_collection, priority_collection);
+
   if (priority === "high") {
+    task_collection = filtered_tasks_high_priority;
+    priority_collection = priority_collection_filtered;
     for (let i = 0; i < task_collection.length; i++) {
-      display_tasks(
-        task_collection[priority_collection_filtered[i]],
-        priority_collection[priority_collection_filtered[i]],
-        true
-      );
+      display_tasks(task_collection[i], priority_collection[i], true);
     }
   } else if (priority === "low") {
-    priority_collection_filtered = priority_collection_filtered.reverse();
+    task_collection = filtered_tasks_high_priority.reverse();
+    priority_collection = priority_collection_filtered.reverse();
     for (let i = 0; i < task_collection.length; i++) {
-      display_tasks(
-        task_collection[priority_collection_filtered[i]],
-        priority_collection[priority_collection_filtered[i]],
-        true
-      );
+      display_tasks(task_collection[i], priority_collection[i], true);
     }
   } else {
     for (let i = 0; i < task_collection.length; i++) {
