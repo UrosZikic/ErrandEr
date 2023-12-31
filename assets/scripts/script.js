@@ -140,18 +140,15 @@ function edit_task(target_task, target_index) {
         document.querySelector(".message").innerHTML = "";
         task_collection.filter((task, index) => {
           if (index === target_index) {
-            console.log(index, target_index);
             // takes the edit input text
             const new_input_value = task_input.value;
             //substitutes the target task's previous value with a new value
-            console.log(default_task_collection, task_collection);
-            console.log(default_priority_collection, priority_collection);
+
             default_task_collection[
               default_task_collection.indexOf(task_collection[index])
             ] = new_input_value;
             task_collection[index] = new_input_value;
-            console.log(default_task_collection, task_collection);
-            console.log(default_priority_collection, priority_collection);
+
             // takes the new priority value
             priority_range.forEach((priority) => {
               if (priority.checked === true) {
@@ -162,8 +159,7 @@ function edit_task(target_task, target_index) {
               default_priority_collection.indexOf(priority_collection[index])
             ] = new_priority_value;
             priority_collection[index] = new_priority_value;
-            console.log(default_task_collection, task_collection);
-            console.log(default_priority_collection, priority_collection);
+
             // add successful edit style
             task_item_el[target_index].classList.add("edit_success");
 
@@ -447,7 +443,6 @@ function delete_many_tasks(selected_items) {
     value_set.push(task_collection[selectedIndex]);
     value_set.push(selectedIndex);
 
-    // delete_these_priorities.push(priority_collection[selectedIndex]);
     delete_these_tasks.push(value_set);
   }
   let temporary_task_collection = [];
@@ -496,8 +491,6 @@ function delete_many_tasks(selected_items) {
       localStorage.setItem("global_priorities", priority_collection);
     }
     // x
-    // localStorage.setItem("global_tasks", task_collection);
-    // localStorage.setItem("global_priorities", priority_collection);
 
     check_task_number();
     task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
@@ -600,16 +593,8 @@ function filter_priority(priority) {
     }
   } else {
     for (let i = 0; i < task_collection.length; i++) {
-      display_tasks(
-        default_task_collection[i],
-        default_priority_collection[i],
-        // task_collection[i],
-        // priority_collection[i],
-        true
-      );
+      display_tasks(task_collection[i], priority_collection[i], true);
     }
-    console.log(default_task_collection, default_priority_collection);
-    console.log(task_collection, priority_collection);
   }
   if (priority) {
     document.querySelector(
@@ -699,6 +684,3 @@ function check_task_number() {
     document.querySelector("#delete_all_tasks").style.display = "block";
   }
 }
-
-// localStorage.clear("global_tasks");
-// localStorage.clear("global_priorities");

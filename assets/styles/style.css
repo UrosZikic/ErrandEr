@@ -61,8 +61,7 @@ h2 {
 #header {
   position: fixed;
   width: 100%;
-  /* background-color: rgb(255, 255, 255); */
-  background-color: inherit;
+  background-color: rgb(255, 255, 255);
   z-index: 999;
 }
 #header img {
