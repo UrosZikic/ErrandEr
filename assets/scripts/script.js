@@ -34,7 +34,7 @@ let id = 0;
   }
 
   check_task_number();
-  task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
+  task_header.innerHTML = active_tasks_note(task_collection);
   // display tasks
   task_collection.forEach((task, index) => {
     display_tasks(task, priority_collection[index], true);
@@ -60,7 +60,7 @@ let id = 0;
         localStorage.setItem("global_priorities", priority_collection);
 
         check_task_number();
-        task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
+        task_header.innerHTML = active_tasks_note(task_collection);
 
         // display tasks
 
@@ -216,7 +216,7 @@ function display_tasks(
     .querySelector("#inner_task_holder")
     .classList.remove("inner_task_holder");
   id += 1;
-  task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
+  task_header.innerHTML = active_tasks_note(task_collection);
 
   const task_holder = document.createElement("li");
   const task_actions = document.createElement("div");
@@ -376,7 +376,7 @@ function display_tasks(
         localStorage.setItem("global_priorities", priority_collection);
       }
       check_task_number();
-      task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
+      task_header.innerHTML = active_tasks_note(task_collection);
       // display tasks
       if (task_collection.length === 0) {
         document
@@ -493,7 +493,7 @@ function delete_many_tasks(selected_items) {
     // x
 
     check_task_number();
-    task_header.innerHTML = `Errand List: (${task_collection.length}) active tasks`;
+    task_header.innerHTML = active_tasks_note(task_collection);
     // display tasks
     if (task_collection.length === 0) {
       document
@@ -683,4 +683,8 @@ function check_task_number() {
   } else {
     document.querySelector("#delete_all_tasks").style.display = "block";
   }
+}
+
+function active_tasks_note(active_tasks) {
+  return `Errand List: (${active_tasks.length}) active tasks`;
 }
