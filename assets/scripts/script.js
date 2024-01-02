@@ -593,7 +593,11 @@ function filter_priority(priority) {
     }
   } else {
     for (let i = 0; i < task_collection.length; i++) {
-      display_tasks(task_collection[i], priority_collection[i], true);
+      display_tasks(
+        default_task_collection[i],
+        default_priority_collection[i],
+        true
+      );
     }
   }
   if (priority) {
